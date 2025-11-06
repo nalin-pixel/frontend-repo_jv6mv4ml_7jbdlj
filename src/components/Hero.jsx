@@ -1,58 +1,50 @@
+import Spline from "@splinetool/react-spline";
 import { Rocket, Trophy, Clock, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden bg-black text-white">
-      {/* Aurora / Gradient backdrop */}
+      {/* Spline 3D Cover */}
+      <div className="absolute inset-0">
+        <Spline scene="https://prod.spline.design/7m4PRZ7kg6K1jPfF/scene.splinecode" style={{ width: "100%", height: "100%" }} />
+      </div>
+
+      {/* Ambient overlays (won't block interaction) */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -inset-32 bg-[radial-gradient(60%_40%_at_20%_10%,rgba(99,102,241,0.45),transparent),radial-gradient(50%_40%_at_80%_0%,rgba(251,191,36,0.35),transparent),radial-gradient(40%_30%_at_50%_60%,rgba(16,185,129,0.25),transparent)] blur-3xl" />
+        {/* Aurora / Gradient wash */}
+        <div className="absolute -inset-32 bg-[radial-gradient(60%_40%_at_20%_10%,rgba(99,102,241,0.25),transparent),radial-gradient(50%_40%_at_80%_0%,rgba(251,191,36,0.2),transparent),radial-gradient(40%_30%_at_50%_60%,rgba(16,185,129,0.15),transparent)] blur-3xl" />
 
         {/* Subtle grid overlay */}
         <div
-          className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:24px_24px] opacity-40 [mask-image:radial-gradient(70%_60%_at_50%_40%,#000_60%,transparent_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:24px_24px] opacity-30 [mask-image:radial-gradient(70%_60%_at_50%_40%,#000_60%,transparent_100%)]"
         />
 
-        {/* Floating orbs */}
+        {/* Slow-drifting starfield */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 0.8, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="absolute left-10 top-24 h-40 w-40 rounded-full bg-indigo-500/20 blur-2xl"
-        />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 0.9, y: 0 }}
-          transition={{ duration: 1.4, delay: 0.1 }}
-          className="absolute right-0 top-40 h-56 w-56 rounded-full bg-amber-400/20 blur-2xl"
-        />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 0.7, y: 0 }}
-          transition={{ duration: 1.6, delay: 0.15 }}
-          className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400/10 blur-3xl"
-        />
-
-        {/* Twinkling stars */}
-        <div className="absolute inset-0">
-          {[...Array(80)].map((_, i) => (
+          initial={{ opacity: 0.6, x: -20, y: -10 }}
+          animate={{ x: 20, y: 10 }}
+          transition={{ duration: 30, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+          className="absolute inset-0"
+        >
+          {[...Array(90)].map((_, i) => (
             <motion.span
               key={i}
               className="absolute h-0.5 w-0.5 rounded-full bg-white/70"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 2 + (i % 5) * 0.6, repeat: Infinity, delay: i * 0.05 }}
+              transition={{ duration: 2.5 + (i % 5) * 0.7, repeat: Infinity, delay: i * 0.07 }}
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
               }}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Content */}
-      <div className="relative mx-auto flex max-w-7xl flex-col items-center px-6 pt-28 text-center">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 pt-28 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,10 +68,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="mt-4 max-w-3xl text-base text-white/80 sm:text-lg"
+          className="mt-4 max-w-3xl text-base text-white/85 sm:text-lg"
         >
-          A high-intensity challenge designed for the sharpest minds. Compete with thousands,
-          solve clever problems, and unlock prizes worth up to 10 Lakh INR.
+          A high-intensity challenge for sharp minds. Compete, solve, and unlock prizes worth up to 10 Lakh INR.
         </motion.p>
 
         <motion.div
@@ -95,18 +86,17 @@ export default function Hero() {
             Register Now
             <Trophy className="h-5 w-5 transition-transform group-hover:scale-110" />
           </a>
-          <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white/80 backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white/85 backdrop-blur">
             <Clock className="h-5 w-5 text-emerald-300" />
             <span>Only 90 minutes. Infinite bragging rights.</span>
           </div>
         </motion.div>
 
-        {/* Accent row */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-10 flex items-center gap-3 text-sm text-white/70"
+          className="mt-10 flex items-center gap-3 text-sm text-white/75"
         >
           <Sparkles className="h-4 w-4 text-indigo-300" />
           Trusted by 50,000+ learners • Scholarships up to 10L • Elite mentorship

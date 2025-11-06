@@ -1,52 +1,48 @@
 import { motion } from "framer-motion";
-import { BookOpen, Briefcase, Code, Database, Cpu, Layers } from "lucide-react";
+import { Users, Globe, Code2, Brain, Sparkles } from "lucide-react";
 
-const YearCard = ({ year, title, topics, beyond }) => (
+const Feature = ({ icon: Icon, title, img, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.5 }}
-    className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 text-white shadow-lg backdrop-blur"
+    transition={{ duration: 0.55, delay }}
+    className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5"
   >
-    <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-      <BookOpen className="h-4 w-4" /> {year}
+    <div className="flex items-center gap-3">
+      <div className="rounded-xl bg-white/10 p-2">
+        <Icon className="h-5 w-5" />
+      </div>
+      <h3 className="text-lg font-semibold">{title}</h3>
     </div>
-    <h3 className="text-xl font-bold">{title}</h3>
-    <ul className="mt-2 list-disc space-y-1 pl-5 text-white/85">
-      {topics.map((t) => (
-        <li key={t}>{t}</li>
-      ))}
-    </ul>
-    <p className="mt-3 text-sm text-white/70"><span className="font-semibold">Beyond Classroom:</span> {beyond}</p>
+    <div className="relative mt-4 h-40 overflow-hidden rounded-xl">
+      <img src={img} alt={title} className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-[1.03]" loading="lazy" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+    </div>
   </motion.div>
 );
 
 export default function Curriculum() {
-  const years = [
+  const features = [
     {
-      year: "Year 1",
-      title: "DSA, Web Dev & Math",
-      topics: ["Data Structures & Algorithms", "Modern Web Development", "Mathematical Foundations"],
-      beyond: "Build your Snapchat • Build AI Movie Maker • Build Netflix",
+      icon: Code2,
+      title: "Build Real Products",
+      img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1600&auto=format&fit=crop",
     },
     {
-      year: "Year 2",
-      title: "Systems & Data",
-      topics: ["Operating Systems", "Databases", "Distributed Systems"],
-      beyond: "Google Summer of Code camp • ACM ICPC camp • Facebook HackerCup AI Track",
+      icon: Brain,
+      title: "AI + Systems",
+      img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop",
     },
     {
-      year: "Year 3",
-      title: "Specializations",
-      topics: ["Hotstar-scale Streaming Web App", "iOS Engineering Track", "HFT Quant Track"],
-      beyond: "Ship production-grade apps, internships, research",
+      icon: Users,
+      title: "Peer Pods & Hackathons",
+      img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop",
     },
     {
-      year: "Year 4",
-      title: "FAANG Track",
-      topics: ["Advanced System Design", "Interview Mastery", "Leadership in Tech"],
-      beyond: "Finish with capstones & placements",
+      icon: Globe,
+      title: "Global Mentors",
+      img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1600&auto=format&fit=crop",
     },
   ];
 
@@ -54,20 +50,45 @@ export default function Curriculum() {
     <section className="relative w-full bg-slate-950 py-20 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(600px_200px_at_20%_0%,rgba(251,191,36,0.12),transparent),radial-gradient(600px_200px_at_80%_0%,rgba(99,102,241,0.12),transparent)]" />
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="mb-10 flex flex-col gap-2">
-          <h2 className="text-3xl font-extrabold sm:text-4xl">Four-Year CS & AI Journey</h2>
-          <p className="max-w-3xl text-white/80">Designed for builders, founders and elite engineers. Includes 3-month internships after Year 2 and Year 3, and a 12-month industry residency in the final year.</p>
+        <div className="mb-8 flex items-center gap-3">
+          <Sparkles className="h-5 w-5 text-indigo-300" />
+          <h2 className="text-3xl font-extrabold sm:text-4xl">Beyond the Classroom</h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {years.map((y) => (
-            <YearCard key={y.year} {...y} />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {features.map((f, i) => (
+            <Feature key={f.title} {...f} delay={i * 0.05} />
           ))}
         </div>
 
-        <div className="mt-8 inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
-          <Briefcase className="h-4 w-4" />
-          Guaranteed practical exposure: 3-month internships after 2nd and 3rd year, 12-month internship in final year.
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+          >
+            <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=1600&auto=format&fit=crop" alt="Demo App" className="h-56 w-full object-cover object-center" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+          >
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop" alt="Dashboard Mockup" className="h-56 w-full object-cover object-center" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+          >
+            <img src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=1600&auto=format&fit=crop" alt="Mobile Mockup" className="h-56 w-full object-cover object-center" />
+          </motion.div>
         </div>
       </div>
     </section>
